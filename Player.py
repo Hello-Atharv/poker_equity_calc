@@ -1,4 +1,10 @@
+from dataclasses import dataclass, field
+from card import Card, Rank, Suit
+
+@dataclass
 class Player:
-    def __init__(self, hole_cards = []):
-        self.hole_cards = hole_cards
-        
+    name: str = ""
+    hole_cards: list[Card] = field(default_factory=list)
+
+
+    

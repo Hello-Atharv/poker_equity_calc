@@ -27,16 +27,16 @@ class Card:
         if len(input) != 2:
             raise ValueError(f"{input} should be two characters")
         r = input[0]
-        s = s[1]
+        s = input[1]
         if r not in RANK_CHARS:
             raise ValueError("Invalid rank")
         try:
             suit = Suit(s)
         except ValueError:
             raise ValueError("Invalid suit") from None
-        return cls(RANK_CHARS[c], suit)
+        return cls(RANK_CHARS[r], suit)
 
     def __str__(self):
-        return f"{'23456789TJQKA'[self.rank-2]}{self.suit.value}"
+        return f"{'23456789TJQKA'[self.rank.value-2]}{self.suit.value}"
 
     
