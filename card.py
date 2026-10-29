@@ -22,12 +22,12 @@ class Card:
             raise TypeError("Card needs valid rank or suit")
 
     @classmethod
-    def from_string(cls, input:str) -> "Card":
-        input = input.strip().upper().replace("10", "T")
-        if len(input) != 2:
-            raise ValueError(f"{input} should be two characters")
-        r = input[0]
-        s = input[1]
+    def from_string(cls, text: str) -> "Card":
+        cleaned = text.strip().upper().replace("10", "T")
+        if len(cleaned) != 2:
+            raise ValueError(f"{text!r} should be two characters")
+        r = cleaned[0]
+        s = cleaned[1]
         if r not in RANK_CHARS:
             raise ValueError("Invalid rank")
         try:

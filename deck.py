@@ -9,7 +9,7 @@ def full_deck() -> list[Card]:
 class Deck:
     cards: list[Card] = field(default_factory = full_deck)
 
-    def __post__init__(self):
+    def __post_init__(self):
         if len(set(self.cards)) != len(self.cards):
             raise ValueError("Deck contains duplicate cards")
 
@@ -18,8 +18,15 @@ class Deck:
         missing = to_remove.difference(self.cards)
         if missing:
             names = ", ".join(sorted(str(c) for c in missing))
-            raise ValueError(f"Not in deck:{names}")
+            raise ValueError(f"Not in deck: {names}")
         self.cards = [c for c in self.cards if c not in to_remove]
+
+    def add(self, cards: Iterable[Card]) -> None:
+        to_add = list(cards)
+        duplicates = set(to_add).intersection(self.cards)
+        if duplicates or len(set(to_add)) != len(to_add):
+            raise ValueError("Cannot add cards already in the deck")
+        self.cards.extend(to_add)
 
 # utilities --------------------------------------------------------------------------------
 
